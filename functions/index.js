@@ -8,16 +8,17 @@ const firestore = require('./firestore');
 // Construct a schema, using GraphQL schema language
 const schema = buildSchema(`
   type Query {
-    addresses(): [Address]
+    addresses: [Address]
     address(id: String!): Address
   }
   type Address {
-      lat: Float,
-      lng: Float,
-      ward: String,
-      country: String,
-      city: String,
-      district: String,
+      id: String
+      lat: Float
+      lng: Float
+      ward: String
+      country: String
+      city: String
+      district: String
       street: String
   }
 `);

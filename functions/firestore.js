@@ -6,11 +6,33 @@ db.settings({ timestampsInSnapshots: true });
 
 exports.get = id =>
 	new Promise((resolve, reject) => {
-        db.collection('addresses')
-            .doc(id)
+		db.collection('addresses')
+			.doc(id)
 			.get()
 			.then(snapshot => {
-				resolve(snapshot.data());
+				const data = Object.assign({}, snapshot.data(), {
+					id
+				});
+				resolve(data);
+				return snapshot;
+			})
+			.catch(console.log);
+	});
+
+exports.getAll = () =>
+	new Promise((resolve, reject) => {
+		db.collection('addresses')
+			.get()
+			.then(snapshot => {
+                let addresses = [];
+                snapshot.forEach(doc => {
+                    const data = Object.assign({}, doc.data(), {
+                        id: doc.id
+                    });
+                    addresses.push(data);
+                });
+                
+                resolve(addresses);
 				return snapshot;
 			})
 			.catch(console.log);
