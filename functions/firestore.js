@@ -24,16 +24,36 @@ exports.getAll = () =>
 		db.collection('addresses')
 			.get()
 			.then(snapshot => {
-                let addresses = [];
-                snapshot.forEach(doc => {
-                    const data = Object.assign({}, doc.data(), {
-                        id: doc.id
-                    });
-                    addresses.push(data);
-                });
-                
-                resolve(addresses);
+				let addresses = [];
+				snapshot.forEach(doc => {
+					const data = Object.assign({}, doc.data(), {
+						id: doc.id
+					});
+					addresses.push(data);
+				});
+
+				resolve(addresses);
 				return snapshot;
 			})
+			.catch(console.log);
+	});
+
+exports.update = address =>
+	new Promise((resolve, reject) => {
+		db.collection('addresses')
+			.doc(id)
+			.set(address, {
+				merge: true
+			})
+			.then(() => resolve())
+			.catch(console.log);
+	});
+
+exports.delete = id =>
+	new Promise((resolve, reject) => {
+		db.collection('addresses')
+			.doc(id)
+			.delete()
+			.then(() => resolve())
 			.catch(console.log);
 	});
