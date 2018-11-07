@@ -25,6 +25,7 @@ const schema = buildSchema(`
     city: String
     district: String
     street: String
+    countryCode: String
   }
   type Address {
       id: String
@@ -35,6 +36,7 @@ const schema = buildSchema(`
       city: String
       district: String
       street: String
+      countryCode: String
   }
 `);
 

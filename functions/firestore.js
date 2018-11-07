@@ -5,27 +5,13 @@ const db = admin.firestore();
 db.settings({ timestampsInSnapshots: true });
 
 class Address {
-  constructor(id, { street, country, district, city, ward, lat, lng }) {
+  constructor(id, address) {
     this.id = id;
-    this.street = street;
-    this.country = country;
-    this.district = district;
-    this.city = city;
-    this.ward = ward;
-    this.lat = lat;
-    this.lng = lng;
+    this.address = address;
   }
 
   getPlainObject() {
-    return {
-      street: this.street,
-      country: this.country,
-      city: this.city,
-      district: this.district,
-      ward: this.ward,
-      lat: this.lat,
-      lng: this.lng
-    };
+    return Object.assign({}, this.address);
   }
 }
 
