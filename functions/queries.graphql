@@ -1,0 +1,43 @@
+query ($id: String!){
+  address(id: $id) {
+    id
+    street
+    lat
+    lng
+    ward
+    country
+    city
+    district
+  }
+}
+
+query {
+  addresses {
+    id
+    street
+    lat
+    lng
+    ward
+    country
+    city
+    district
+  }
+}
+
+mutation($address: AddressInput!) {
+    insert(input: $address)
+}
+
+mutation($id: String!, $address: AddressInput!) {
+  update(id: $id, input: $address)
+}
+
+mutation($id: String!) {
+  delete(id: $id)
+}
+
+# {
+#   "id": "ioZYUuuR4EmJ4sPkmIkE",
+#   "address": { 
+#   }
+# }
